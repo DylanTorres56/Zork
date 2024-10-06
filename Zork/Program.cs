@@ -1,121 +1,104 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Zork
 {
-    class Program()
+    internal class Program()
     {
-        private static string[] Rooms = new string[]
+        private static string CurrentRoom 
         {
-            "Forest",
-            "West of House",
-            "Behind House",
-            "Clearing",
-            "Canyon View"
-
-            // {"Rocky Trail", "South of House", "Canyon View"},
-            // {"Forest", "West of House", "Behind House"},
-            // {"Dense Woods", "North of House", "Clearing"}
-        };        
+            get 
+            {
+                return Rooms[Location.Row, Location.Column];
+            }
+        }
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Zork!");
-            int currentRoomIndex = 1;
+            
             Commands command = Commands.UNKNOWN;
             while (command != Commands.QUIT) 
             {
+                Console.WriteLine(CurrentRoom);
                 Console.Write("> ");
                 command = ToCommand(Console.ReadLine().Trim());
 
-                string outputString;
                 switch (command)
                 {
                     case Commands.QUIT:
-                        outputString = "Thank you for playing!";
+                        Console.WriteLine("Thank you for playing!");
                         break;
 
                     case Commands.LOOK:
-                        outputString = "This is an open field west of a white house, with a boarded front door.\nA rubber mat saying 'Welcome to Zork!' lies by the door.";
+                        Console.WriteLine("A rubber mat saying 'Welcome to Zork!' lies by the door.");
                         break;
 
                     case Commands.NORTH:                        
                     case Commands.SOUTH:
-                        outputString = $"The way is shut!";
-                        break;
                     case Commands.EAST:
-                        Move(command);
-                        if (Move(command) == true)
+                    case Commands.WEST: 
+                        if (Move(command) == false)
                         {
-                            currentRoomIndex++;
-                            outputString = $"You moved {command}.";
-                        }
-                        else
-                        {
-                            outputString = $"The way is shut!";
-                        }
-                        break;
-                    case Commands.WEST:
-                        Move(command);
-                        if (Move(command) == true)
-                        {
-                            currentRoomIndex--;
-                            outputString = $"You moved {command}.";
-                        }
-                        else 
-                        {
-                            outputString = $"The way is shut!";
+                            Console.WriteLine("The way is shut!");
                         }
                         break;
 
                     default:
-                        outputString = "Unknown command.";
+                        Console.WriteLine("Unknown command.");
                         break;                    
                 }
-
-                Console.WriteLine(outputString + $"\n{Rooms[currentRoomIndex]}");
             }            
         }
 
-        static bool Move(Commands moveCommand) 
+        private static bool Move(Commands moveCommand) 
         {
-            bool moveSucceeds;
+            Assert.IsTrue(IsDirection(moveCommand), "Invalid direction.");
+            
+            bool isValidMove = true;
             int roomIndex = 1;
 
             switch (moveCommand)
             {
-                case Commands.NORTH:
-                case Commands.SOUTH:
-                    moveSucceeds = false;
+                case Commands.NORTH when Location.Row < Rooms.GetLength(0) - 1:
+                    Location.Row++;
                     break;
-                case Commands.EAST:
-                    if (roomIndex >= Rooms.Length) 
-                    {
-                        moveSucceeds = false;
-                    }
-                    else
-                    {                        
-                        moveSucceeds = true;
-                        roomIndex++;
-                    }
+                case Commands.SOUTH when Location.Row > 0:
+                    Location.Row--;
                     break;
-                case Commands.WEST:
-                    if (roomIndex < 0)
-                    {
-                        moveSucceeds = false;
-                    }
-                    else 
-                    {
-                        moveSucceeds = true;
-                        roomIndex--;
-                    }
+                case Commands.EAST when Location.Column < Rooms.GetLength(1) - 1:
+                    Location.Column++;
+                    break;
+                case Commands.WEST when Location.Column > 0:
+                    Location.Column--;
                     break;
                 default:
-                    moveSucceeds = false;
+                    isValidMove = false;
                     break;
             }
-            return moveSucceeds;
+            return  isValidMove;
         }
 
-        private static Commands ToCommand(string commandString) => Enum.TryParse(commandString, true, out Commands result) ? result : Commands.UNKNOWN;        
+        private static Commands ToCommand(string commandString) => 
+            Enum.TryParse(commandString, true, out Commands result) ? result : Commands.UNKNOWN;
+
+        private static bool IsDirection(Commands command) => Directions.Contains(command);
+
+        private static readonly string[,] Rooms = new string[,]
+        {
+            {"Rocky Trail", "South of House", "Canyon View"},
+            {"Forest", "West of House", "Behind House"},
+            {"Dense Woods", "North of House", "Clearing"}
+        };
+
+        private static readonly List<Commands> Directions = new List<Commands> 
+        {
+            Commands.NORTH,
+            Commands.SOUTH,
+            Commands.EAST,
+            Commands.WEST,
+        };
+
+        private static (int Row, int Column) Location = (1, 1);
     }
 }

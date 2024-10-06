@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Zork")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b98b8cddf2e3d67d0f6d58712f211a3b6c1fadda")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7fe948f7ce3c25bd00f6a2d959177c87de739528")]
 [assembly: System.Reflection.AssemblyProductAttribute("Zork")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Zork")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

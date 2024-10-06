@@ -4,44 +4,116 @@ namespace Zork
 {
     class Program()
     {
+        private static string[] Rooms = new string[]
+        {
+            "Forest",
+            "West of House",
+            "Behind House",
+            "Clearing",
+            "Canyon View"
+
+            // {"Rocky Trail", "South of House", "Canyon View"},
+            // {"Forest", "West of House", "Behind House"},
+            // {"Dense Woods", "North of House", "Clearing"}
+        };        
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Zork!");
-
+            int currentRoomIndex = 1;
             Commands command = Commands.UNKNOWN;
             while (command != Commands.QUIT) 
             {
                 Console.Write("> ");
                 command = ToCommand(Console.ReadLine().Trim());
 
+                string outputString;
                 switch (command)
                 {
+                    case Commands.QUIT:
+                        outputString = "Thank you for playing!";
+                        break;
+
                     case Commands.LOOK:
-                        Console.WriteLine("A rubber mat saying 'Welcome to Zork!' lies by the door.");
+                        outputString = "This is an open field west of a white house, with a boarded front door.\nA rubber mat saying 'Welcome to Zork!' lies by the door.";
                         break;
-                    case Commands.NORTH:
-                        Console.WriteLine("You moved " + command.ToString() + ".");
-                        break;
+
+                    case Commands.NORTH:                        
                     case Commands.SOUTH:
-                        Console.WriteLine("You moved " + command.ToString() + ".");
+                        outputString = $"The way is shut!";
                         break;
                     case Commands.EAST:
-                        Console.WriteLine("You moved " + command.ToString() + ".");
+                        Move(command);
+                        if (Move(command) == true)
+                        {
+                            currentRoomIndex++;
+                            outputString = $"You moved {command}.";
+                        }
+                        else
+                        {
+                            outputString = $"The way is shut!";
+                        }
                         break;
                     case Commands.WEST:
-                        Console.WriteLine("You moved " + command.ToString() + ".");
+                        Move(command);
+                        if (Move(command) == true)
+                        {
+                            currentRoomIndex--;
+                            outputString = $"You moved {command}.";
+                        }
+                        else 
+                        {
+                            outputString = $"The way is shut!";
+                        }
                         break;
-                    case Commands.UNKNOWN:
-                        Console.WriteLine("Unknown command.");
-                        break;
-                    case Commands.QUIT:
-                        Console.WriteLine("Thank you for playing!");
-                        break;
+
+                    default:
+                        outputString = "Unknown command.";
+                        break;                    
                 }
 
-            }
+                Console.WriteLine(outputString + $"\n{Rooms[currentRoomIndex]}");
+            }            
+        }
 
-            Console.WriteLine(command);
+        static bool Move(Commands moveCommand) 
+        {
+            bool moveSucceeds;
+            int roomIndex = 1;
+
+            switch (moveCommand)
+            {
+                case Commands.NORTH:
+                case Commands.SOUTH:
+                    moveSucceeds = false;
+                    break;
+                case Commands.EAST:
+                    if (roomIndex >= Rooms.Length) 
+                    {
+                        moveSucceeds = false;
+                    }
+                    else
+                    {                        
+                        moveSucceeds = true;
+                        roomIndex++;
+                    }
+                    break;
+                case Commands.WEST:
+                    if (roomIndex < 0)
+                    {
+                        moveSucceeds = false;
+                    }
+                    else 
+                    {
+                        moveSucceeds = true;
+                        roomIndex--;
+                    }
+                    break;
+                default:
+                    moveSucceeds = false;
+                    break;
+            }
+            return moveSucceeds;
         }
 
         private static Commands ToCommand(string commandString) => Enum.TryParse(commandString, true, out Commands result) ? result : Commands.UNKNOWN;        

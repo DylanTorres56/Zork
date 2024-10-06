@@ -6,7 +6,7 @@ namespace Zork
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Welcome to Zork!");
 
             Commands command = Commands.UNKNOWN;
             while (command != Commands.QUIT) 
@@ -20,22 +20,22 @@ namespace Zork
                         Console.WriteLine("A rubber mat saying 'Welcome to Zork!' lies by the door.");
                         break;
                     case Commands.NORTH:
-                        Console.WriteLine("You moved " + command.ToString());
+                        Console.WriteLine("You moved " + command.ToString() + ".");
                         break;
                     case Commands.SOUTH:
-                        Console.WriteLine("You moved " + command.ToString());
+                        Console.WriteLine("You moved " + command.ToString() + ".");
                         break;
                     case Commands.EAST:
-                        Console.WriteLine("You moved " + command.ToString());
+                        Console.WriteLine("You moved " + command.ToString() + ".");
                         break;
                     case Commands.WEST:
-                        Console.WriteLine("You moved " + command.ToString());
+                        Console.WriteLine("You moved " + command.ToString() + ".");
                         break;
                     case Commands.UNKNOWN:
                         Console.WriteLine("Unknown command.");
                         break;
                     case Commands.QUIT:
-                        Console.WriteLine("Thank you for playing! \nPress any key to continue. . .");
+                        Console.WriteLine("Thank you for playing!");
                         break;
                 }
 

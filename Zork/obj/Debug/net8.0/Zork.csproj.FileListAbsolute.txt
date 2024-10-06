@@ -1,0 +1,15 @@
+C:\Users\glaci\Documents\GitHub\Zork\Zork\bin\Debug\net8.0\Zork.exe
+C:\Users\glaci\Documents\GitHub\Zork\Zork\bin\Debug\net8.0\Zork.deps.json
+C:\Users\glaci\Documents\GitHub\Zork\Zork\bin\Debug\net8.0\Zork.runtimeconfig.json
+C:\Users\glaci\Documents\GitHub\Zork\Zork\bin\Debug\net8.0\Zork.dll
+C:\Users\glaci\Documents\GitHub\Zork\Zork\bin\Debug\net8.0\Zork.pdb
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.AssemblyInfoInputs.cache
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.AssemblyInfo.cs
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.csproj.CoreCompileInputs.cache
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.sourcelink.json
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.dll
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\refint\Zork.dll
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.pdb
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\Zork.genruntimeconfig.cache
+C:\Users\glaci\Documents\GitHub\Zork\Zork\obj\Debug\net8.0\ref\Zork.dll
